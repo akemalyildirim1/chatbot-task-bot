@@ -4,10 +4,20 @@ version = "0.1.0"
 description = ""
 authors = ["akemalyildirim1 <akemalyildirim1@gmail.com>"]
 readme = "README.md"
-packages = [{include = "chatbot_task_bot", from = "src"}]
+packages = [
+    { include = "src/" },
+    {include = "*", from = "src"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+botbuilder-integration-aiohttp = "^4.15.1"
+pydantic = "^2.7.4"
+pydantic-settings = "^2.3.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.10"
+mypy = "^1.10.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -16,7 +26,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 88
-exclude = ["alembic", "tests"]
+exclude = ["tests"]
 
 [tool.ruff.lint]
 select = [
@@ -45,20 +55,6 @@ docstring-code-format = true
 convention = "google"
 
 [tool.mypy]
-plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
+plugins = ["pydantic.mypy"]
 ignore_missing_imports = true
 strict_optional = false
-exclude = ["alembic", ]
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-
-[tool.coverage.run]
-branch = true
-source = ["src"]
-
-
-[tool.coverage.report]
-skip_empty = true
-show_missing = true
-fail_under = 100
