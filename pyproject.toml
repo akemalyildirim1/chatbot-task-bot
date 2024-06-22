@@ -1,0 +1,64 @@
+[tool.poetry]
+name = "chatbot-task-bot"
+version = "0.1.0"
+description = ""
+authors = ["akemalyildirim1 <akemalyildirim1@gmail.com>"]
+readme = "README.md"
+packages = [{include = "chatbot_task_bot", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+line-length = 88
+exclude = ["alembic", "tests"]
+
+[tool.ruff.lint]
+select = [
+    # pydocstyle
+    "D",
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
+ignore_missing_imports = true
+strict_optional = false
+exclude = ["alembic", ]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+
+[tool.coverage.report]
+skip_empty = true
+show_missing = true
+fail_under = 100
